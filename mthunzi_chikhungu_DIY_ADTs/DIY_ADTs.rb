@@ -21,3 +21,24 @@ class Stack
 end
 
 
+class Queue
+    def initialize
+        # create ivar to store queue here
+        @queue = []
+    end
+
+    def enqueue(el)
+        # adds an element to the queue
+        @queue.push(el)
+    end
+
+    def dequeue
+        # removes one element from the queue using FIFO
+        @queue.shift
+    end
+
+    def peek
+        # returns but doesn't remove, the first element in the queue
+        @queue.first
+    end
+end
