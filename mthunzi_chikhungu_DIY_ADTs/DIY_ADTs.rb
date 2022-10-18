@@ -1,6 +1,6 @@
 class Stack
     def initialize
-      # create ivar to store stack here!
+      # creates ivar to store stack
       @stack = []
     end
 
@@ -23,7 +23,7 @@ end
 
 class Queue
     def initialize
-        # create ivar to store queue here
+        # creates ivar to store queue
         @queue = []
     end
 
@@ -40,5 +40,48 @@ class Queue
     def peek
         # returns but doesn't remove, the first element in the queue
         @queue.first
+    end
+end
+
+class Map
+    def initialize
+        # creates ivar to store map
+        @my_map = []
+    end
+
+    def set(key, value)
+        # sets a key value pair in the map
+        pair_index = @my_map.index { |pair| pair[0] == key }
+
+        if pair_index
+            @my_map[pair_index][1] = value
+        else
+            @my_map << [key, value]
+        end
+        
+        [key, value]
+    end
+
+    def get(key)
+        # returns the value(s) associated with the key in the map
+        @my_map.each do |pair|
+            return pair[1] if pair[0] == key
+        end
+
+        nil
+    end
+
+    def delete(key)
+        # removes the key value pair from the map
+        @my_map.each do |pair|
+            return @my_map.delete([pair[0],pair[1]]) if pair[0] == key
+        end
+
+        nil
+    end
+
+    def show
+        # Shows the map
+        @my_map
     end
 end
