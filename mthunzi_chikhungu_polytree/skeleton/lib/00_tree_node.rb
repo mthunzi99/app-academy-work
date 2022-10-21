@@ -1,25 +1,25 @@
 module Searchable
     def dfs(target_value)
-        return self if self.value == target_value
+        return self if self.value == target_value # Returns the node that has the target_value
 
-        children.each do |child|
-            result = child.dfs(target_value)
-            return result unless result.nil?
+        children.each do |child| 
+            result = child.dfs(target_value) # Stores the result of the recursive call
+            return result unless result.nil? # Returns the result unless it is nil
         end
 
-        nil
+        nil # Returns nil if target_value can't be found in the polytree
     end
 
     def bfs(target_value)
-        array = [self]
-        while !array.empty?
-            node = array.shift
+        queue = [self] # Queue for nodes
+        while !queue.empty? # Loops until queue is empty
+            node = queue.shift # Takes node from the front of the queue and stores it in the node var
             
-            return node if node.value == target_value
-            array.concat(node.children)      
+            return node if node.value == target_value # Returns the node that has the target_value
+            queue.concat(node.children) # Adds children to the end of the queue 
         end
 
-        nil
+        nil # Returns nil if target_value can't be found in polytree
     end
 
 end
