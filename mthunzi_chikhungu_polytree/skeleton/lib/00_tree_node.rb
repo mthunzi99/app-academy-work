@@ -10,8 +10,17 @@ module Searchable
         nil
     end
 
+    def bfs(target_value)
+        array = [self]
+        while !array.empty?
+            node = array.shift
+            
+            return node if node.value == target_value
+            array.concat(node.children)      
+        end
 
-
+        nil
+    end
 
 end
 
