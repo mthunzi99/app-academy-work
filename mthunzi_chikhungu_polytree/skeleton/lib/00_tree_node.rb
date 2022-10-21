@@ -1,4 +1,23 @@
+module Searchable
+    def dfs(target_value)
+        return self if self.value == target_value
+
+        children.each do |child|
+            result = child.dfs(target_value)
+            return result unless result.nil?
+        end
+
+        nil
+    end
+
+
+
+
+end
+
 class PolyTreeNode
+    include Searchable
+
     attr_reader :parent, :children
     attr_accessor :value
 
