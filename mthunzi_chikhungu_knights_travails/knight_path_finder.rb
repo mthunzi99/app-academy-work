@@ -12,8 +12,9 @@ class KnightPathFinder
     
     def initialize(root_node)
         @root_node = root_node
+        @considered_positions = [@root_node]
 
-
+        
     end
 
     def valid_moves(pos) # Returns an array of the valid positions that the night can move to from pos
@@ -29,7 +30,15 @@ class KnightPathFinder
             valid << [i+x, j+y]
         end
         
-        valid # List of valid moves
+        valid # Array of valid moves
+    end
+
+    def new_move_positions(pos) # Returns array of valid move positions that havene't been considered
+        positions = []
+        valid_moves(pos).each { |node| positions << node unless @considered_positions.include?(node) } # Adds the new move positions to the postions array
+        @considered_positions.concat(positions) # Adds the new move positions to the @considered_positions array
+        
+        positions # Array of new move positions
     end
 
 
