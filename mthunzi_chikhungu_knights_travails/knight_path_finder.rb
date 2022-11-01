@@ -1,3 +1,5 @@
+require_relative '00_tree_node.rb'
+
 class KnightPathFinder
     DELTAS = [
         [-1, 2],
@@ -39,6 +41,13 @@ class KnightPathFinder
         @considered_positions.concat(positions) # Adds the new move positions to the @considered_positions array
         
         positions # Array of new move positions
+    end
+
+    def build_move_tree # Creates the Polytree that with all the possible moves
+        tree = [@root_node]
+
+
+
     end
 
 
