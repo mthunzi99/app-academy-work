@@ -27,7 +27,7 @@ end
 class PolyTreeNode
     include Searchable
 
-    attr_reader :parent, :children
+    attr_reader :parent
     attr_accessor :value
 
     def initialize(value)
@@ -39,10 +39,10 @@ class PolyTreeNode
     def parent=(parent)
         return if @parent == parent
 
-        @parent.children.delete(self) if @parent
+        @parent._children.delete(self) if @parent
 
         @parent = parent
-        @parent.children << self unless @parent.nil?
+        @parent._children << self unless @parent.nil?
 
         self
     end
@@ -54,6 +54,11 @@ class PolyTreeNode
     def remove_child(child)
         raise "Node is not a valid child" if !@children.include?(child)
         child.parent = nil
+    end
+
+    protected
+    def _children
+        @children
     end
 
 end
