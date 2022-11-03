@@ -35,15 +35,10 @@ class KnightPathFinder
         build_move_tree
     end
 
-    def find_path(end_pos)
-        target_node = root_node.bfs(end_pos)
+    def find_path(end_pos) # Finds the shortest path to the end_pos using trace_path_back
+        target_node = root_node.dfs(end_pos)
 
-
-    end
-
-    def trace_path_back(end_node)
-        
-
+        trace_path_back(target_node)
     end
 
     private_constant :DELTAS
@@ -77,12 +72,22 @@ class KnightPathFinder
         end
     end
 
+    def trace_path_back(end_node) # Creates an array of the path to the end_pos in order from the root_node
+        path = [end_node]
+        current_node = end_node
+        until current_node.parent.nil? # Adds parent of current_node to the front of the array until root_node is reached where parent is nil
+            path.unshift(current_node.parent) 
+            current_node = path.first
+        end
+        path.map(&:value)
+    end
+
 end
 
 
 if $PROGRAM_NAME == __FILE__
     kpf = KnightPathFinder.new([0, 0])
-    p kpf.find_path([7, 6]) # => [[0, 0], [1, 2], [2, 4], [3, 6], [5, 5], [7, 6]]
+    print kpf.find_path([7, 6]) # => [[0, 0], [1, 2], [2, 4], [3, 6], [5, 5], [7, 6]]
     puts
-    p kpf.find_path([6, 2]) # => [[0, 0], [1, 2], [2, 0], [4, 1], [6, 2]]
+    print kpf.find_path([6, 2]) # => [[0, 0], [1, 2], [2, 0], [4, 1], [6, 2]]
 end

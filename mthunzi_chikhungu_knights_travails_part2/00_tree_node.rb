@@ -2,7 +2,7 @@ module Searchable
     def dfs(target_value)
         return self if self.value == target_value # Returns the node that has the target_value
 
-        children.each do |child| 
+        _children.each do |child| 
             result = child.dfs(target_value) # Stores the result of the recursive call
             return result unless result.nil? # Returns the result unless it is nil
         end
