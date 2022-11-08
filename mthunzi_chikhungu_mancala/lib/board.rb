@@ -20,9 +20,22 @@ class Board
   end
 
   def valid_move?(start_pos)
+    if start_pos < 0 || start_pos > 12
+      raise "Invalid starting cup"
+    end
+
+    if @cups[start_pos].empty?
+      raise "Starting cup is empty"      
+    end
   end
 
   def make_move(start_pos, current_player_name)
+    stones = @cups[start_pos]
+    @cups[start_pos] = []
+    
+    until stones.empty?
+      
+    end
   end
 
   def next_turn(ending_cup_idx)
