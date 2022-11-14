@@ -14,6 +14,8 @@ class Board
                 end
             end
         end
+
+        nil
     end
     attr_accessor :rows
     def initialize
@@ -33,6 +35,15 @@ class Board
         @rows[x][y] = val
     end
 
+    def move_piece(start_pos, end_pos)
+        raise ArgumentError.new "There is no piece at #{start_pos}" if self[start_pos].is_a?(NullPiece)
+        raise ArgumentError.new "You cannot move to #{end_pos}" if self[end_pos].is_a?(Piece)
+
+        self[end_pos] = self[start_pos]
+        self[start_pos] = NullPiece.new
+
+        nil
+    end
 
 
 end
