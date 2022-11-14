@@ -30,7 +30,7 @@ end
 
 def feed_me_a_fruit
   puts "Hello, I am a friendly monster. :)"
-  
+
   begin
     puts "Feed me a fruit! (Enter the name of a fruit:)"
     maybe_fruit = gets.chomp
@@ -46,8 +46,12 @@ end
 # PHASE 4
 class BestFriend
   def initialize(name, yrs_known, fav_pastime)
+    raise ArgumentError.new "I need to know your name silly" if name.empty?
+    raise ArgumentError.new "You're not my best friend, we haven't even known each other for 5 years" if yrs_known.to_i < 5
+    raise ArgumentError.new "You have to have at least one hobby, tell me what it is" if fav_pastime.empty?
+    
     @name = name
-    @yrs_known = yrs_known
+    @yrs_known = yrs_known.to_i
     @fav_pastime = fav_pastime
   end
 
