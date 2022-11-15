@@ -1,4 +1,4 @@
-require_relative 'piece'
+require_relative 'pieces'
 require_relative 'null_piece'
 
 class Board
@@ -17,6 +17,7 @@ class Board
 
         nil
     end
+
     attr_accessor :rows
     def initialize
         @rows = Array.new(8) { Array.new(8) }
@@ -52,23 +53,31 @@ class Board
     end
 
     def valid_pos?(pos)
-
+        pos.all? { |coord| coord.between?(0, 7) }
     end
 
     def checkmate?(colour)
+        return false unless in_check?(colour)
 
+        checking = pieces.select { |piece| piece.colour == colour}
+        checking.each do |p|
+            p.valid_moves.empty?
+        end
     end
 
     def in_check?(colour)
-
+        king_pos = find_king(colour).pos
+        pieces.any? do |piece|
+            piece.colour != colour && piece.moves.include?(king_pos)
+        end
     end
 
     def find_king(colour)
-
+        pieces.find { |piece| piece.color == color && piece.is_a?(King) }
     end
 
     def pieces
-
+        @rows.flatten.reject(&:empty?)
     end
 
     def dup
