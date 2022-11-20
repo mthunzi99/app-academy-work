@@ -42,11 +42,13 @@ class Board
         self[pos] = piece
     end
 
-    def move_piece(start_pos, end_pos)
+    def move_piece(colour, start_pos, end_pos)
         raise ArgumentError.new "There is no piece at #{start_pos}" if self[start_pos].is_a?(NullPiece)
         raise ArgumentError.new "You cannot move to #{end_pos}" if self[end_pos].is_a?(Piece)
-
-        self[end_pos] = self[start_pos]
+        raise ArgumentError.new "It's not #{colour}'s turn" if self[start_pos].colour == colour
+        
+        
+        self[end_pos] = self[start_pos] 
         self[start_pos] = NullPiece.new
 
         nil
@@ -56,25 +58,6 @@ class Board
         pos.all? { |coord| coord.between?(0, 7) }
     end
 
-    def checkmate?(colour)
-        return false unless in_check?(colour)
-
-        checking = pieces.select { |piece| piece.colour == colour}
-        checking.each do |p|
-            p.valid_moves.empty?
-        end
-    end
-
-    def in_check?(colour)
-        king_pos = find_king(colour).pos
-        pieces.any? do |piece|
-            piece.colour != colour && piece.moves.include?(king_pos)
-        end
-    end
-
-    def find_king(colour)
-        pieces.find { |piece| piece.color == color && piece.is_a?(King) }
-    end
 
     def pieces
         @rows.flatten.reject(&:empty?)
