@@ -17,6 +17,8 @@ module Stepable
         end
     end
 
+    private
+    
     def move_diffs
         # Implemented by subclass
         raise NotImplementedError
