@@ -12,13 +12,21 @@ class Piece
         # Implemented by subclass
         raise NotImplementedError
     end
-    
+
     def to_s
         " #{symbol} "
     end
 
     def empty?
         false
+    end
+
+    def valid_moves
+
+    end
+
+    def move_into_check?
+        
     end
 
 
