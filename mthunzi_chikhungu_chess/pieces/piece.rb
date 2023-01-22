@@ -5,7 +5,7 @@ class Piece
     def initialize(colour, board, pos)
         @colour, @board, @pos = colour, board, pos
 
-        board.add_piece(self)
+        @board.add_piece(self, pos)
     end
 
     def symbol

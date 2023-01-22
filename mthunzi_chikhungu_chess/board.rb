@@ -1,29 +1,12 @@
 require_relative 'pieces'
-require_relative 'null_piece'
+require 'byebug'
 
 class Board
-    def populate_board
-        piece_rows = [0,1,6,7]
-
-        (0...8).each do |row|
-            (0...8).each do |col|
-                if piece_rows.include?(row)
-                    @rows[row][col] = Piece.new(self)
-                else
-                    @rows[row][col] = NullPiece.new
-                end
-            end
-        end
-
-        nil
-    end
-
     attr_accessor :rows
-    def initialize
-        @rows = Array.new(8) { Array.new(8) }
-        @null_piece = NullPiece.new
+    def initialize(populate = true)
+        @null_piece = NullPiece.instance
 
-        populate_board
+        create_board(populate)
     end
 
     def [](pos)
@@ -37,7 +20,7 @@ class Board
     end
 
     def add_piece(piece, pos)
-        raise "This position is not empty" unless self[pos].empty?
+        raise "This position is not empty" unless empty?(pos)
 
         self[pos] = piece
     end
@@ -47,11 +30,8 @@ class Board
         raise ArgumentError.new "You cannot move to #{end_pos}" if self[end_pos].is_a?(Piece)
         raise ArgumentError.new "It's not #{colour}'s turn" if self[start_pos].colour == colour
         
-        
         self[end_pos] = self[start_pos] 
         self[start_pos] = NullPiece.new
-
-        nil
     end
 
     def valid_pos?(pos)
@@ -67,4 +47,44 @@ class Board
         @rows.dup
     end
 
+    def empty?(pos)
+        self[pos].empty?
+    end
+
+    private
+
+    attr_reader :null_piece
+
+    def create_board(populate)
+        @rows = Array.new(8) { Array.new(8, @null_piece) }
+        return unless populate
+
+        [:balck, :white].each do |colour|
+            populate_back_row(colour)
+            populate_pawn_row(colour)
+        end
+    end
+
+    def populate_back_row(colour)
+        row = colour == :white ? 7 : 0
+        back_row = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
+        
+        back_row.each_with_index do |piece, col|
+            piece.new(colour, self, [row,col])
+        end
+    end
+
+    def populate_pawn_row(colour)
+        row = colour == :white ? 6 : 1
+
+        8.times do |col|
+            Pawn.new(colour, self, [row,col])
+        end
+    end
+
 end
+
+a = Board.new
+p a
+
+
