@@ -25,13 +25,13 @@ class Board
         self[pos] = piece
     end
 
-    def move_piece(colour, start_pos, end_pos)
-        raise ArgumentError.new "There is no piece at #{start_pos}" if self[start_pos].is_a?(NullPiece)
-        raise ArgumentError.new "You cannot move to #{end_pos}" if self[end_pos].is_a?(Piece)
-        raise ArgumentError.new "It's not #{colour}'s turn" if self[start_pos].colour == colour
+    def move_piece(start_pos, end_pos)
+        piece = self[start_pos]
+        raise ArgumentError.new "Piece cannot move to #{end_pos}" unless piece.moves.include?(end_pos)
         
-        self[end_pos] = self[start_pos] 
-        self[start_pos] = NullPiece.new
+        self[end_pos] = piece 
+        self[start_pos] = @null_piece
+        piece.pos = end_pos
     end
 
     def valid_pos?(pos)
@@ -59,8 +59,8 @@ class Board
         @rows = Array.new(8) { Array.new(8, @null_piece) }
         return unless populate
 
-        [:balck, :white].each do |colour|
-            populate_back_row(colour)
+        [:black, :white].each do |colour|
+            # populate_back_row(colour)
             populate_pawn_row(colour)
         end
     end
@@ -86,5 +86,7 @@ end
 
 a = Board.new
 p a
+puts
+
 
 
