@@ -21,36 +21,41 @@ module Slideable
     end
 
     def moves
-        move_dir
+        all_moves = []
+        move_dirs.each do |dx, dy|
+            all_moves.concat(grow_unblocked_moves_in_dir(dx, dy))
+        end
+        
+        all_moves
     end
 
     private
 
-    def move_dir
+    def move_dirs
         # Implemented by subclass
         raise NotImplementedError
     end
 
     def grow_unblocked_moves_in_dir(dx, dy)
         all_moves = []
-        x, y = pos
+        x, y = @pos
 
 
         while true
-            pos = [x + dx, y + dy]
+            x, y = x + dx, y + dy
+            pos = [x, y]
 
-            next unless board.valid_pos?(pos)
+            break unless @board.valid_pos?(pos)
 
-            if board[pos].empty?
+            if @board.empty?(pos)
                 all_moves << pos
             else
-                all_moves << pos if board[pos].colour != colour
+                all_moves << pos if @board[pos].colour != colour
                 break
             end
-
-            all_moves
         end
 
+        all_moves
     end
 
 end

@@ -2,19 +2,19 @@ module Stepable
     def moves
         all_moves = []
         move_diffs.each do |(dx, dy)|
-            x, y = pos
-            pos = [(x + dx), (y + dy)]
+            x, y = @pos
+            pos = [x + dx, y + dy]
 
-            next unless valid_pos?(pos)
+            next unless @board.valid_pos?(pos)
 
-            if board.empty?(pos)
+            if @board.empty?(pos)
                 all_moves << pos
-            elsif board[pos].colour != colour
+            elsif @board[pos].colour != colour
                 all_moves << pos
             end
-            
-            all_moves
         end
+
+        all_moves
     end
 
     private

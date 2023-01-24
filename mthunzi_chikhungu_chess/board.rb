@@ -1,5 +1,4 @@
 require_relative 'pieces'
-require 'byebug'
 
 class Board
     attr_accessor :rows
@@ -38,7 +37,6 @@ class Board
         pos.all? { |coord| coord.between?(0, 7) }
     end
 
-
     def pieces
         @rows.flatten.reject(&:empty?)
     end
@@ -60,7 +58,7 @@ class Board
         return unless populate
 
         [:black, :white].each do |colour|
-            # populate_back_row(colour)
+            populate_back_row(colour)
             populate_pawn_row(colour)
         end
     end
@@ -83,10 +81,3 @@ class Board
     end
 
 end
-
-a = Board.new
-p a
-puts
-
-
-
