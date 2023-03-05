@@ -1,5 +1,4 @@
 require_relative 'piece'
-require 'byebug'
 
 class Pawn < Piece
 
@@ -38,7 +37,6 @@ class Pawn < Piece
 
     def side_attacks
         x, y = pos
-        # debugger
         attacks = [ [x + forward_dir, y - 1], [x + forward_dir, y + 1] ]
 
         attacks.select do |new_pos|
