@@ -1,4 +1,5 @@
 require_relative 'pieces'
+require_relative 'display'
 
 class Board
     attr_accessor :rows
@@ -79,7 +80,12 @@ class Board
             Pawn.new(colour, self, [row,col])
         end
     end
-
 end
 
+a = Board.new
+d = Display.new(a)
 
+loop do 
+    d.render
+    d.cursor.get_input
+end

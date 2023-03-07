@@ -32,7 +32,7 @@ MOVES = {
 
 class Cursor
 
-  attr_reader :cursor_pos, :board
+  attr_reader :cursor_pos, :board, :selected
 
   def initialize(cursor_pos, board)
     @cursor_pos = cursor_pos
@@ -74,7 +74,7 @@ class Cursor
       input << STDIN.read_nonblock(2) rescue nil
     end
 
-    STDIN.echo = true # the console prints return values again
+    # STDIN.echo = true # the console prints return values again
     STDIN.cooked! # the opposite of raw mode :)
 
     return input
@@ -97,6 +97,6 @@ class Cursor
 
   def update_pos(diff)
     new_pos = [@cursor_pos[0] + diff[0], @cursor_pos[1] + diff[1]]
-    @cursor_pos = new_pos if @board.valid_pos(new_pos)
+    @cursor_pos = new_pos if @board.valid_pos?(new_pos)
   end
 end
