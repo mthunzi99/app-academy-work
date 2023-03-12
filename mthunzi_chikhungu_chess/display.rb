@@ -38,10 +38,8 @@ class Display
 
     def render
         system("cls") || system("clear")
-        puts "Use the arrow keys, WASD or IJKL to move the cursor. Use SPACE or ENTER to select"
+        puts "Use WASD or IJKL to move the cursor. Use SPACE select"
         build_grid.each { |row| puts row.join }
-
-
     end
 end
 
