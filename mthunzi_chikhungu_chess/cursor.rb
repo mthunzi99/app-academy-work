@@ -38,6 +38,7 @@ class Cursor
     @cursor_pos = cursor_pos
     @board = board
     @selected = false
+    @valid = false
   end
 
   def get_input
@@ -47,6 +48,10 @@ class Cursor
 
   def toggle_selected
     @selected = !@selected
+  end
+
+  def toggle_valid
+    @valid = !@valid
   end
 
   private
