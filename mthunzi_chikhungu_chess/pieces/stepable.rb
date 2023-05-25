@@ -9,7 +9,7 @@ module Stepable
 
             if @board.empty?(pos)
                 all_moves << pos
-            elsif @board[pos].colour != colour
+            elsif @board[pos].color != color
                 all_moves << pos
             end
         end

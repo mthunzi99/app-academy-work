@@ -1,9 +1,9 @@
 class Piece
-    attr_reader :colour, :board
+    attr_reader :color, :board
     attr_accessor :pos
 
-    def initialize(colour, board, pos)
-        @colour, @board, @pos = colour, board, pos
+    def initialize(color, board, pos)
+        @color, @board, @pos = color, board, pos
 
         @board.add_piece(self, pos)
     end

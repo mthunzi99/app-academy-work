@@ -1,6 +1,6 @@
 require_relative 'pieces'
 require_relative 'display'
-
+require 'byebug'
 class Board
     attr_accessor :rows
     def initialize(populate = true)
@@ -99,10 +99,6 @@ class Board
     end
 end
 
-a = Board.new
-d = Display.new(a)
-
-loop do 
-    d.render
-    d.cursor.get_input
+if $PROGRAM_NAME == __FILE__
+    
 end

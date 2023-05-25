@@ -43,5 +43,6 @@ class Display
     end
 end
 
+if $PROGRAM_NAME == __FILE__
 
-
+end

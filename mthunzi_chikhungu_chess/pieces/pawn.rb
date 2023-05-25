@@ -3,7 +3,7 @@ require_relative 'piece'
 class Pawn < Piece
 
     def symbol
-        '♟'.colorize(colour)
+        '♟'.colorize(color)
     end
 
     def moves
@@ -14,14 +14,14 @@ class Pawn < Piece
 
     def at_start_row?
         x, y = @pos
-        return true if x == 6 && @colour == :white
-        return true if x == 1 && @colour == :black
+        return true if x == 6 && @color == :white
+        return true if x == 1 && @color == :black
 
         false
     end
 
     def forward_dir
-        @colour == :white ? -1 : 1
+        @color == :white ? -1 : 1
     end
 
     def forward_steps
@@ -44,7 +44,7 @@ class Pawn < Piece
             next false if @board.empty?(new_pos)
 
             threatened_piece = @board[new_pos]
-            threatened_piece && threatened_piece.colour != @colour
+            threatened_piece && threatened_piece.color != @color
         end
     end
 end

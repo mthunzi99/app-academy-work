@@ -13,10 +13,9 @@ class Game
     def play
         until @board.checkmate?(@current_player)
             start_pos, end_pos = nil, nil
-
             until start_pos && end_pos
-                @display.render
-                
+                @display.render  
+              
                 if start_pos
                     end_pos = @display.cursor.get_input
                 else
@@ -33,4 +32,4 @@ end
 
 if $PROGRAM_NAME == __FILE__
     Game.new.play
-  end
+end

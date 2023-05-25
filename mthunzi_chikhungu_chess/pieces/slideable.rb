@@ -50,7 +50,7 @@ module Slideable
             if @board.empty?(pos)
                 all_moves << pos
             else
-                all_moves << pos if @board[pos].colour != colour
+                all_moves << pos if @board[pos].color != color
                 break
             end
         end
