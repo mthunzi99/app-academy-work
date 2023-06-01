@@ -26,8 +26,10 @@ class Game
             @board.move_piece(start_pos, end_pos)
         end
     end
-
-
+    
+    def next_player
+        @current_player = @current_player == :white ? :black : :white
+    end
 end
 
 if $PROGRAM_NAME == __FILE__

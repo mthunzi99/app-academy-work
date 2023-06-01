@@ -37,7 +37,7 @@ class Display
     end
 
     def render
-        system("cls") || system("clear")
+        # system("cls") || system("clear")
         puts "Use WASD or IJKL to move the cursor. Use SPACE select"
         build_grid.each { |row| puts row.join }
     end

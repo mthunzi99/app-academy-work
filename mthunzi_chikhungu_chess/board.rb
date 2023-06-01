@@ -1,6 +1,6 @@
 require_relative 'pieces'
 require_relative 'display'
-require 'byebug'
+
 class Board
     attr_accessor :rows
     def initialize(populate = true)
@@ -38,6 +38,16 @@ class Board
         piece.pos = end_pos
     end
 
+    def dup
+        new_board = Board.new(false)
+    
+        pieces.each do |piece|
+            piece.class.new(piece.color, new_board, piece.pos)
+        end
+    
+        new_board
+    end
+
     def valid_pos?(pos)
         pos.all? { |coord| coord.between?(0, 7) }
     end
@@ -50,7 +60,7 @@ class Board
     def checkmate?(color)
         return false unless in_check?(color)
         
-        opponent = pieces.select { |piece| piece.color != color }
+        opponent = pieces.select { |piece| piece.color == color }
         opponent.all? { |piece| piece.valid_moves.empty? }
     end
 
@@ -100,5 +110,12 @@ class Board
 end
 
 if $PROGRAM_NAME == __FILE__
-    
+    board = Board.new
+    display = Display.new(board)
+    board.move_piece([1,4], [2,4])
+    board.move_piece([6,5], [5,5])
+    board.move_piece([6,6], [4,6])
+    board.move_piece([0,3], [4,7])
+    display.render
+    board[[0,4]].valid_moves
 end
