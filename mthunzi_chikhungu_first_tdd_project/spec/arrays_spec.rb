@@ -1,4 +1,4 @@
-require 'first_tdd.rb'
+require 'arrays.rb'
 require 'rspec'
 
 describe Array do
@@ -10,4 +10,13 @@ describe Array do
       expect(array.uniq).to eq([1, 2, 3])
     end
   end
+
+  describe "#two_sum" do
+    it "finds all pairs of positions where the elements at those positions sum to zero." do
+      array = [-1, 0, 2, -2, 1]
+      expect(array.two_sum).to eq([[0, 4], [2, 3]])
+    end
+  end
+
+  
 end
