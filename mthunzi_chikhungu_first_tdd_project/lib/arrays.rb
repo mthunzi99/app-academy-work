@@ -27,7 +27,15 @@ class Array
 end
 
 def my_transpose(matrix)
+  transposed = Array.new(matrix.size) { Array.new(matrix.size) }
+
+  matrix.each_with_index do |row, i|
+    row.each_with_index do |ele, j|
+      transposed[j][i] = ele
+    end
+  end
   
+  transposed
 end
 
 def stock_picker(stock_prices)
