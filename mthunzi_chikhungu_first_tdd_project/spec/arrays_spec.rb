@@ -31,4 +31,11 @@ describe Array do
           ])
     end
   end
+
+  describe "#stock_picker" do
+    it "outputs the most profitable pair of days on which to first buy the stock and then sell the stock." do
+      array = [35, 36, 40, 32, 50, 53, 67, 20, 26, 41]
+      expect(stock_picker(array)).to eq([3,6])
+    end
+  end
 end

@@ -34,10 +34,24 @@ def my_transpose(matrix)
       transposed[j][i] = ele
     end
   end
-  
+
   transposed
 end
 
 def stock_picker(stock_prices)
-  
+  best_pair = nil
+  best_profit = 0
+
+  stock_prices.each_index do |buy_date|
+    stock_prices.each_index do |sell_date|
+      next if sell_date < buy_date
+
+      profit = stock_prices[sell_date] - stock_prices[buy_date]
+      if profit > best_profit
+        best_pair, best_profit = [buy_date, sell_date], profit
+      end
+    end
+  end
+
+  best_pair  
 end
